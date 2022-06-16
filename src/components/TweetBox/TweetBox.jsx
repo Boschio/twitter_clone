@@ -5,6 +5,7 @@ import "./TweetBox.css"
 export default function TweetBox(props) {
 
   let test = (props.tweetText.length === 0 || props.tweetText.length > 140)
+  let charCount = (props.tweetText.length!=0 && 140-props.tweetText.length)
 
   const handleOnTweetTextChange = (event) => {
     props.setTweetText(event.target.value)
@@ -30,7 +31,7 @@ export default function TweetBox(props) {
 
       <div className="tweet-box-footer">
         <TweetBoxIcons />
-        <TweetCharacterCount tweetText={props.tweetText}/>
+        <TweetCharacterCount tweetText={props.tweetText} charCount={charCount} />
         <TweetSubmitButton handleOnSubmit={handleOnSubmit} tweetText={props.tweetText} test={test} />
       </div>
     </div>
@@ -49,9 +50,8 @@ export function TweetBoxIcons() {
 }
 
 export function TweetCharacterCount(props) {
-  // ADD CODE HERE
 
-  return <span className="tweet-length">{props.tweetText.length!=0 && 140-props.tweetText.length}</span>
+  return <span className="tweet-length" style={{color: props.charCount<1 ? "red" : "black"}} >{props.charCount}</span>
 }
 
 export function TweetSubmitButton(props) {
