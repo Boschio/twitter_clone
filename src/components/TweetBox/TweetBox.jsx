@@ -4,7 +4,7 @@ import "./TweetBox.css"
 
 export default function TweetBox(props) {
 
-  let test = (props.tweetText.length === 0 || props.tweetText.length > 140)
+  let disabled = (props.tweetText.length === 0 || props.tweetText.length > 140)
   let charCount = (props.tweetText.length!=0 && 140-props.tweetText.length)
 
   const handleOnTweetTextChange = (event) => {
@@ -32,7 +32,7 @@ export default function TweetBox(props) {
       <div className="tweet-box-footer">
         <TweetBoxIcons />
         <TweetCharacterCount tweetText={props.tweetText} charCount={charCount} />
-        <TweetSubmitButton handleOnSubmit={handleOnSubmit} tweetText={props.tweetText} test={test} />
+        <TweetSubmitButton handleOnSubmit={handleOnSubmit} tweetText={props.tweetText} disabled={disabled} />
       </div>
     </div>
   )
@@ -59,7 +59,7 @@ export function TweetSubmitButton(props) {
   return (
     <div className="tweet-submit" >
       <i className="fas fa-plus-circle"></i>
-      <button className="tweet-submit-button" onClick={props.handleOnSubmit} disabled={props.test} >Tweet</button>
+      <button className="tweet-submit-button" onClick={props.handleOnSubmit} disabled={props.disabled} >Tweet</button>
     </div>
   )
 }
